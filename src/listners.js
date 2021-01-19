@@ -16,9 +16,6 @@ let projectsCounter = countProjects;
 const Project = require('./project').default;
 const Task = require('./task').default;
 
-// input: event=> project DOM
-// output: toggle show class (show the details of the project (tasks))
-// No dependencies
 const openTab = (e) => {
   const id = e.target.dataset.projectId;
   const projectDiv = document.querySelector(`#proj_${id}`);
@@ -29,9 +26,6 @@ const openTab = (e) => {
   projectDiv.classList.toggle('shown');
 };
 
-// input: take project formulaire
-// output: modify value of the form to (empty string) and toggle class to hide
-// No dependencies
 const cancelAddProject = () => {
   const input = document.querySelector('#project_title');
   input.value = '';
@@ -39,10 +33,6 @@ const cancelAddProject = () => {
   form.classList.toggle('hide');
 };
 
-// input: event (project to delete)
-// output: modify DOM (tabs of project (left)), remove project from local storage, remove also from tasks_container
-// update the show project
-// dependency: deleteFromProjectList
 const deleteProject = (e) => {
   const id = e.target.dataset.projectId;
   const wrapper = document.querySelector(`#project_container_${id}`);
@@ -62,9 +52,6 @@ const deleteProject = (e) => {
   }
 };
 
-// input: event (project to modify)
-// output: switch hide class for project_show_mode and project_edit_mode spans
-// No dependencies
 const editProject = (e) => {
   const id = e.target.dataset.projectId;
   const spanShow = document.querySelector(`#project_show_mode_${id}`);
@@ -73,8 +60,6 @@ const editProject = (e) => {
   spanEdit.classList.toggle('hide');
 };
 
-// input: event (project to modify)
-// output: switch hide class for project_show_mode and project_edit_mode spans and restore previous value of edit_project_title input
 const cancelProject = (e) => {
   const id = e.target.dataset.projectId;
   const spanShow = document.querySelector(`#project_show_mode_${id}`);
@@ -86,12 +71,6 @@ const cancelProject = (e) => {
   input.value = btnTxt.textContent;
 };
 
-// input: event (project to modify)
-// output: update the name of project in the locale storage.
-//  update the show btn text.
-//  switch hide class for project_show_mode and project_edit_mode spans and update value of edit_project_title input
-//  update header title of the project
-// dependencies: editProjectTitle
 const submitEditProject = (e) => {
   const id = e.target.dataset.projectId;
   const input = document.querySelector(`#edit_project_title_${id}`);
@@ -106,9 +85,6 @@ const submitEditProject = (e) => {
   defaultShownTab.textContent = input.value;
 };
 
-// input: event: project (the cancel btn of add task form)
-// output: reset the input values of task adding form and hide this last form
-// No dependencies
 const cancelAddTask = (e) => {
   const id = e.target.dataset.projectId;
   const titleInput = document.querySelector(`#task_title_${id}`);
@@ -121,9 +97,6 @@ const cancelAddTask = (e) => {
   form.classList.toggle('hide');
 };
 
-// input: event (task of the project)
-// output: (DOM) remove task card from the wrapper of tasks of that project (DOM)
-//          update the project and also the local storage
 const deleteTask = (e) => {
   const taskId = e.target.dataset.TaskId;
   const projId = e.target.dataset.TaskProjId;
@@ -141,9 +114,6 @@ const deleteTask = (e) => {
   localStorage.setItem('projectsList', JSON.stringify(projectsList));
 };
 
-// input: event (project with tack)
-// output: reset the values of the form;
-// dependencies: findProject
 const cancelEditTask = (e) => {
   const taskId = e.target.dataset.TaskId;
   const projId = e.target.dataset.TaskProjId;
@@ -168,10 +138,6 @@ const cancelEditTask = (e) => {
   divEditMode.classList.toggle('hide');
 };
 
-// input: event (taskID & projectID)
-// output: update the properties of the task according to the input values
-//        modify DOM and localstorage
-// dependencies: findProject
 const submitEditTask = (e) => {
   const taskId = e.target.dataset.TaskId;
   const projId = e.target.dataset.TaskProjId;
@@ -223,9 +189,6 @@ const submitEditTask = (e) => {
   localStorage.setItem('projectsList', JSON.stringify(projectsList));
 };
 
-// input: task
-// output: create DOM for displaying the task (contains div for show the task and another one to edit the task)
-// dependencies: formatDistanceToNow, cancelEditTask, deleteTask, submitEditTask, cancelEditTask
 const displayTask = (task) => {
   const taskCard = document.createElement('div');
   taskCard.setAttribute('class', 'task_card');
@@ -408,9 +371,6 @@ const displayTask = (task) => {
   return taskCard;
 };
 
-// input: event (project)
-// create new task object, call the display task method then hides the add task form and update the project and the localstorage
-// dependecies: addTaskToProject, Task constructor, displayTask
 const addTask = (e) => {
   const id = e.target.dataset.projectId;
   const projectIndx = findProject(projectsList, id);
@@ -436,9 +396,6 @@ const addTask = (e) => {
   localStorage.setItem('projectsList', JSON.stringify(projectsList));
 };
 
-// input: project
-// output: create tabcontent that contains the tasks of the project
-// dependencies: cancelAddTask, addTask, formatISO(new Date(), { representation: 'date' }),displayTask
 const taskNav = (myproject) => {
   // wrapper
   const divNavWrap = document.createElement('div');
@@ -641,8 +598,6 @@ const displayProject = (project) => {
   return wraper;
 };
 
-// create new project and append to DOM and show the project in the page (class shown)
-// dependencies: displayProject
 const addProject = () => {
   const input = document.querySelector('#project_title');
   const title = input.value;

@@ -53,7 +53,7 @@ const editProjectTitle = (projectsList, id, value) => {
 };
 
 // input: project list array, id of project and the task
-// output: add task the the project (id) 
+// output: add task the the project (id)
 // dependencies: findProject, addTask
 const addTaskToProject = (array, id, task) => {
   const target = findProject(array, id);
@@ -103,5 +103,5 @@ const countProjects = parseInt(countProjectsStored, 10);
 export {
   projectsList, countProjects, deleteFromProjectList,
   editProjectTitle, tasksContainer, addTaskToProject, findProject,
-  parseJsonToTask, readProjectFromStorage
+  parseJsonToTask, readProjectFromStorage,
 };

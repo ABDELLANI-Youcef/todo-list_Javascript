@@ -1,7 +1,8 @@
 import { addProject, cancelAddProject, displayProject } from './listners';
 import addProjIcon from './add.png';
 
-
+// input: projects list
+// output: DOM: create the project nav div
 const projectNav = (projList) => {
   const divNavWrap = document.createElement('div');
   divNavWrap.setAttribute('id', 'project_nav');

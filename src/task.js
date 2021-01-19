@@ -70,4 +70,6 @@ class Task {
   }
 }
 
-export default Task;
+// export default Task;
+// module.export = Task;
+export { Task as default }; 

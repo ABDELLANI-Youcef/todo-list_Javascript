@@ -103,4 +103,5 @@ const countProjects = parseInt(countProjectsStored, 10);
 export {
   projectsList, countProjects, deleteFromProjectList,
   editProjectTitle, tasksContainer, addTaskToProject, findProject,
+  parseJsonToTask, readProjectFromStorage
 };

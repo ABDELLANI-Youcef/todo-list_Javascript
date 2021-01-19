@@ -70,4 +70,4 @@ class Task {
   }
 }
 
-export { Task as default }; 
+export default Task;

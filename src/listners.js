@@ -16,7 +16,6 @@ let projectsCounter = countProjects;
 const Project = require('./project').default;
 const Task = require('./task').default;
 
-
 const openTab = (e) => {
   const id = e.target.dataset.projectId;
   const projectDiv = document.querySelector(`#proj_${id}`);
@@ -26,7 +25,6 @@ const openTab = (e) => {
   }
   projectDiv.classList.toggle('shown');
 };
-
 
 const cancelAddProject = () => {
   const input = document.querySelector('#project_title');
@@ -98,7 +96,6 @@ const cancelAddTask = (e) => {
   const form = document.querySelector(`#add_task_form_${id}`);
   form.classList.toggle('hide');
 };
-
 
 const deleteTask = (e) => {
   const taskId = e.target.dataset.TaskId;
@@ -528,6 +525,9 @@ const taskNav = (myproject) => {
   return divNavWrap;
 };
 
+// input (project : object)
+// output : DOM object (div that show project details: left side and right side )
+// depencies: taskNav, openTab, editProject, deleteProject, submitEditProject, cancelProject
 const displayProject = (project) => {
   const wraper = document.createElement('div');
   wraper.setAttribute('id', `project_container_${project.id}`);

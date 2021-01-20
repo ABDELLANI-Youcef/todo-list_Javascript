@@ -15,6 +15,7 @@ defaultProject.addTask(defaultTask2);
 const projectsListStored = localStorage.getItem('projectsList') ? JSON.parse(localStorage.getItem('projectsList')) : [defaultProject];
 const countProjectsStored = localStorage.getItem('countProjects') ? JSON.parse(localStorage.getItem('countProjects')) : 1;
 
+// binary research in an array
 const findProject = (array, id) => {
   let min = 0;
   let max = array.length - 1;
@@ -34,23 +35,34 @@ const findProject = (array, id) => {
   return i;
 };
 
+// input: projectList (array) and id of the project
+// output: remove project from projects list
+// dependencies: findProject
 const deleteFromProjectList = (projectsList, id) => {
   const target = findProject(projectsList, id);
   projectsList.splice(target, 1);
 };
 
+// input: projectList (array) and id of the project
+// output: edit project from projects list and update localstorage
+// dependencies: findProject
 const editProjectTitle = (projectsList, id, value) => {
   const target = findProject(projectsList, id);
   projectsList[target].title = value;
   localStorage.setItem('projectsList', JSON.stringify(projectsList));
 };
 
+// input: project list array, id of project and the task
+// output: add task the the project (id)
+// dependencies: findProject, addTask
 const addTaskToProject = (array, id, task) => {
   const target = findProject(array, id);
   const project = array[target];
   project.addTask(task);
 };
 
+// input: objJson
+// output: taskobject (from Json object)
 const parseJsonToTask = (objJson) => {
   const title = objJson._title;
   const description = objJson._description;
@@ -66,6 +78,9 @@ const parseJsonToTask = (objJson) => {
   return task;
 };
 
+// input: objJson
+// output: create project with its tasks (items)
+// dependencies: parseJsonToTask, addTask
 const readProjectFromStorage = (objJson) => {
   const title = objJson._title;
   const id = objJson._id;
@@ -88,4 +103,5 @@ const countProjects = parseInt(countProjectsStored, 10);
 export {
   projectsList, countProjects, deleteFromProjectList,
   editProjectTitle, tasksContainer, addTaskToProject, findProject,
+  parseJsonToTask, readProjectFromStorage,
 };
